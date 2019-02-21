@@ -21,6 +21,7 @@ This is a boilerplate to build a full stack web application using React, Node.js
     - [Concurrently](#concurrently)
     - [VSCode + ESLint + Prettier](#vscode--eslint--prettier)
       - [Installation guide](#installation-guide)
+  - [Credits](#credits)
 
 ## Introduction
 
@@ -253,3 +254,7 @@ This starts a server and listens on port 8080 for connections. The app responds 
     ```
 
 Above, we have modified editor configurations. Alternatively, this can be configured at the project level by following [this article](https://medium.com/@netczuk/your-last-eslint-config-9e35bace2f99).
+
+## Credits
+
+This project was forked from [simple-react-full-stack](https://github.com/crsandeep/simple-react-full-stack).
