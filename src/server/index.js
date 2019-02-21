@@ -1,18 +1,33 @@
 const Koa = require('koa');
-const Router = require('koa-router');
 const serve = require('koa-static');
-const os = require('os');
+const session = require('koa-session');
+const cors = require('@koa/cors');
+const { ApolloServer } = require('apollo-server-koa');
+
+require('./db');
+
+const router = require('./routes');
+const resolvers = require('./resolvers');
+const schema = require('./schema');
 
 const app = new Koa();
-const router = new Router();
 
-router.get('/api/getUsername', async (ctx) => {
-  ctx.set('Content-Type', 'application/json');
-  ctx.body = { username: os.userInfo().username };
+const apolloServer = new ApolloServer({
+  typeDefs: schema,
+  resolvers,
+  context: async ({ctx}) => {
+    return {};
+  },
 });
 
+app.use(cors());
+app.use(session(app));
 app.use(serve('dist'));
 app.use(router.routes());
 app.use(router.allowedMethods());
+apolloServer.applyMiddleware({
+  app: app,
+  path: '/graphql',
+});
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
