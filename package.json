@@ -1,5 +1,5 @@
 {
-  "name": "simple-react-full-stack",
+  "name": "simple-react-koa-full-stack",
   "version": "1.0.0",
   "description": "Boilerplate to build a full stack web application using React, Node.js, Koa and Webpack.",
   "main": "src/server/index.js",
