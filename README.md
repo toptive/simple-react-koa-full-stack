@@ -1,11 +1,11 @@
-# simple-react-full-stack
+# simple-react-koa-full-stack
 
-[![Build Status](https://travis-ci.org/crsandeep/simple-react-full-stack.svg?branch=master)](https://travis-ci.org/crsandeep/simple-react-full-stack)
-[![Greenkeeper badge](https://badges.greenkeeper.io/crsandeep/simple-react-full-stack.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/toptive/simple-react-koa-full-stack.svg?branch=master)](https://travis-ci.org/toptive/simple-react-koa-full-stack)
+[![Greenkeeper badge](https://badges.greenkeeper.io/toptive/simple-react-koa-full-stack.svg)](https://greenkeeper.io/)
 
-This is a boilerplate to build a full stack web application using React, Node.js, Express and Webpack. It is also configured with webpack-dev-server, eslint, prettier and babel.
+This is a boilerplate to build a full stack web application using React, Node.js, Koa and Webpack. It is also configured with webpack-dev-server, eslint, prettier and babel.
 
-- [simple-react-full-stack](#simple-react-full-stack)
+- [simple-react-koa-full-stack](#simple-react-koa-full-stack)
   - [Introduction](#introduction)
     - [Development mode](#development-mode)
     - [Production mode](#production-mode)
@@ -17,33 +17,33 @@ This is a boilerplate to build a full stack web application using React, Node.js
     - [Webpack](#webpack)
     - [Webpack dev server](#webpack-dev-server)
     - [Nodemon](#nodemon)
-    - [Express](#express)
+    - [Koa](#koa)
     - [Concurrently](#concurrently)
     - [VSCode + ESLint + Prettier](#vscode--eslint--prettier)
       - [Installation guide](#installation-guide)
 
 ## Introduction
 
-[Create React App](https://github.com/facebook/create-react-app) is a quick way to get started with React development and it requires no build configuration. But it completely hides the build config which makes it difficult to extend. It also requires some additional work to integrate it with an existing Node.js/Express backend application.
+[Create React App](https://github.com/facebook/create-react-app) is a quick way to get started with React development and it requires no build configuration. But it completely hides the build config which makes it difficult to extend. It also requires some additional work to integrate it with an existing Node.js/Koa backend application.
 
-This is a simple full stack [React](https://reactjs.org/) application with a [Node.js](https://nodejs.org/en/) and [Express](https://expressjs.com/) backend. Client side code is written in React and the backend API is written using Express. This application is configured with [Airbnb's ESLint rules](https://github.com/airbnb/javascript) and formatted through [prettier](https://prettier.io/).
+This is a simple full stack [React](https://reactjs.org/) application with a [Node.js](https://nodejs.org/en/) and [Koa](https://koajs.com/) backend. Client side code is written in React and the backend API is written using Koa. This application is configured with [Airbnb's ESLint rules](https://github.com/airbnb/javascript) and formatted through [prettier](https://prettier.io/).
 
 ### Development mode
 
-In the development mode, we will have 2 servers running. The front end code will be served by the [webpack dev server](https://webpack.js.org/configuration/dev-server/) which helps with hot and live reloading. The server side Express code will be served by a node server using [nodemon](https://nodemon.io/) which helps in automatically restarting the server whenever server side code changes.
+In the development mode, we will have 2 servers running. The front end code will be served by the [webpack dev server](https://webpack.js.org/configuration/dev-server/) which helps with hot and live reloading. The server side Koa code will be served by a node server using [nodemon](https://nodemon.io/) which helps in automatically restarting the server whenever server side code changes.
 
 ### Production mode
 
-In the production mode, we will have only 1 server running. All the client side code will be bundled into static files using webpack and it will be served by the Node.js/Express application.
+In the production mode, we will have only 1 server running. All the client side code will be bundled into static files using webpack and it will be served by the Node.js/Koa application.
 
 ## Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/crsandeep/simple-react-full-stack
+git clone https://github.com/toptive/simple-react-koa-full-stack
 
 # Go inside the directory
-cd simple-react-full-stack
+cd simple-react-koa-full-stack
 
 # Install dependencies
 yarn (or npm install)
@@ -62,7 +62,7 @@ yarn start (or npm start)
 
 ### Folder Structure
 
-All the source code will be inside **src** directory. Inside src, there is client and server directory. All the frontend code (react, css, js and any other assets) will be in client directory. Backend Node.js/Express code will be in the server directory.
+All the source code will be inside **src** directory. Inside src, there is client and server directory. All the frontend code (react, css, js and any other assets) will be in client directory. Backend Node.js/Koa code will be in the server directory.
 
 ### Babel
 
@@ -179,7 +179,7 @@ devServer: {
 }
 ```
 
-[**Port**](https://webpack.js.org/configuration/dev-server/#devserver-port) specifies the Webpack dev server to listen on this particular port (3000 in this case). When [**open**](https://webpack.js.org/configuration/dev-server/#devserver-open) is set to true, it will automatically open the home page on startup. [Proxying](https://webpack.js.org/configuration/dev-server/#devserver-proxy) URLs can be useful when we have a separate API backend development server and we want to send API requests on the same domain. In our case, we have a Node.js/Express backend where we want to send the API requests to.
+[**Port**](https://webpack.js.org/configuration/dev-server/#devserver-port) specifies the Webpack dev server to listen on this particular port (3000 in this case). When [**open**](https://webpack.js.org/configuration/dev-server/#devserver-open) is set to true, it will automatically open the home page on startup. [Proxying](https://webpack.js.org/configuration/dev-server/#devserver-proxy) URLs can be useful when we have a separate API backend development server and we want to send API requests on the same domain. In our case, we have a Node.js/Koa backend where we want to send the API requests to.
 
 ### Nodemon
 
@@ -195,23 +195,31 @@ nodemon.json file is used to describe the configurations for Nodemon. Below is t
 
 Here, we tell nodemon to watch the files in the directory src/server where out server side code resides. Nodemon will restart the node server whenever a file under src/server directory is modified.
 
-### Express
+### Koa
 
-Express is a web application framework for Node.js. It is used to build our backend API's.
+Koa is a web application framework for Node.js. It is used to build our backend API's.
 
 src/server/index.js is the entry point to the server application. Below is the src/server/index.js file
 
 ```javascript
-const express = require("express");
-const os = require("os");
+const Koa = require('koa');
+const Router = require('koa-router');
+const serve = require('koa-static');
+const os = require('os');
 
-const app = express();
+const app = new Koa();
+const router = new Router();
 
-app.use(express.static("dist"));
-app.get("/api/getUsername", (req, res) =>
-  res.send({ username: os.userInfo().username })
-);
-app.listen(8080, () => console.log("Listening on port 8080!"));
+router.get('/api/getUsername', async (ctx) => {
+  ctx.set('Content-Type', 'application/json');
+  ctx.body = { username: os.userInfo().username };
+});
+
+app.use(serve('dist'));
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
 ```
 
 This starts a server and listens on port 8080 for connections. The app responds with `{username: <username>}` for requests to the URL (/api/getUsername). It is also configured to serve the static files from **dist** directory.
