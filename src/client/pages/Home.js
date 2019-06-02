@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "@reach/router";
 
-import './app.css';
-import reactImage from './react.png';
-
-export default function App() {
+export default function Home() {
   const [username, setUsername] = useState(null);
 
   // Example calling api
@@ -34,7 +32,7 @@ export default function App() {
   return (
     <div>
       {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-      <img src={reactImage} alt="react" />
+      <Link to="login">Login</Link>
     </div>
   );
 }
