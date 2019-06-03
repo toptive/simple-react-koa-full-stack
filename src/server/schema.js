@@ -7,9 +7,19 @@ const typeDefs = gql`
     body: String
   }
 
+  type User {
+    username: String
+    token: String
+  }
+
   input ArticleInput {
     title: String
     body: String
+  }
+
+  input UserInput {
+    username: String
+    password: String
   }
 
   type Query {
@@ -18,6 +28,8 @@ const typeDefs = gql`
 
   type Mutation {
     createArticle(article: ArticleInput): Article
+    register(user: UserInput): User
+    login(user: UserInput): User
   }
 `
 

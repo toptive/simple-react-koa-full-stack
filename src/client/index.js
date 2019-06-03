@@ -6,13 +6,27 @@ import { ApolloProvider } from "react-apollo";
 import './index.css';
 
 import Routes from './Routes';
+import { UserProvider } from './UserContext';
 
-const client = new ApolloClient();
+const token = localStorage.getItem('token');
+
+const client = new ApolloClient({
+  request: async operation => {
+    operation.setContext({
+      headers: {
+        authorization: 'Bearer ' + token,
+      }
+    });
+  },
+});
+
 
 const App = () => (
-  <ApolloProvider client={client}>
-    <Routes />
-  </ApolloProvider>
+  <UserProvider>
+    <ApolloProvider client={client}>
+      <Routes />
+    </ApolloProvider>
+  </UserProvider>
 );
 
 ReactDOM.render(<App />, document.getElementById('root'));
